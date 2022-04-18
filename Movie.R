@@ -1,5 +1,5 @@
 library(recommenderlab)
-library(ggplot2)                       #Author DataFlair
+library(ggplot2)                       
 library(data.table)
 library(reshape2)
 library(pacman)
@@ -21,7 +21,7 @@ GenreMovie <- as.data.frame(DataMovie$genres, stringsAsFactors=FALSE)
 library(data.table)
 GenreMovie2 <- as.data.frame(tstrsplit(GenreMovie[,1], '[|]', 
                                         type.convert=TRUE), 
-                              stringsAsFactors=FALSE) #DataFlair
+                              stringsAsFactors=FALSE) 
 colnames(GenreMovie2) <- c(1:10)
 GenreList <- c("Action", "Adventure", "Animation", "Children", 
                 "Comedy", "Crime","Documentary", "Drama", "Fantasy",
@@ -32,7 +32,7 @@ GenreMatrix1[1,] <- GenreList
 colnames(GenreMatrix1) <- GenreList
 for (index in 1:nrow(GenreMovie2)) {
   for (col in 1:ncol(GenreMovie2)) {
-    gen_col = which(GenreMatrix1[1,] == GenreMovie2[index,col]) #Author DataFlair
+    gen_col = which(GenreMatrix1[1,] == GenreMovie2[index,col]) 
     GenreMatrix1[index+1,gen_col] <- 1
   }
 }
@@ -44,7 +44,7 @@ str(GenreMatrix2)
 
 #creating a search matrix  to perform a search of films by specifying  the genres in the list
 SearchMatrix <- cbind(DataMovie[,1:2], GenreMatrix2[])
-head(SearchMatrix)    #DataFlair
+head(SearchMatrix)   
 
 #converted matrix into sparse one
 MatrixRating <- dcast(DataRating, userId~movieId, value.var = "rating", na.rm=FALSE)
